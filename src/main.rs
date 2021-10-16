@@ -468,7 +468,7 @@ fn solve(students: &Students) -> Option<StudentAssignment> {
 
     // For the rest of the students, generate random assignments, and
     // find out which has the highest "score".
-    for _ in 0..(2 as usize).pow(26) {
+    for _ in 0..(2 as usize).pow(20) {
         let mut assignment = Vec::new();
 
         draft.shuffle(&mut rng);
@@ -528,9 +528,12 @@ fn main() -> anyhow::Result<()> {
 
     if let Some(sol) = out {
         for t in sol.iter() {
+	    let mut team_name = String::from("team");
             for m in &t.members {
                 print!("{},", m);
+		team_name = format!("{}_{}", team_name, m);
             }
+	    print!("{},", team_name);
             print!("{}\n", t.score);
         }
     } else {
